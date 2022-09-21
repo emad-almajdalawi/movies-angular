@@ -1,6 +1,7 @@
 * {
   padding: 0;
   margin: 0;
+  font-size: 18px;
 }
 
 .container {
@@ -22,4 +23,43 @@
   padding: 15px;
   cursor: pointer;
   gap: 5px;
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr 1fr 2fr;
+  justify-content: center;
+}
+
+.page-numbers {
+  background: lightgray;
+  padding: 12px;
+  border-radius: 25px;
+  display: flex;
+  gap: 35px;
+}
+
+button {
+  cursor: pointer;
+  width: 75%;
+  border-radius: 30px;
+}
+
+.prev {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.next {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.number {
+  background: transparent;
+  border: none;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 5px;
 }

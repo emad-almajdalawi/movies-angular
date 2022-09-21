@@ -11,6 +11,7 @@ export class MoviesComponent implements OnInit {
 
   imgPrefex: string = 'https://image.tmdb.org/t/p/w500/'
   apiKey: string = '?api_key=f82ecbb7a5110caecaee2bee5e4c79d6'
+  page: number = 1
 
   constructor(
     public dataServace: DataService,
@@ -18,9 +19,19 @@ export class MoviesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.dataServace.getMovies().subscribe((data: MoviesData) => {
+    this.dataServace.getMovies(this.page).subscribe((data: MoviesData) => {
       this.dataServace.moviesDataResults.next(data.results);
     })
+  }
+
+  changePage(pageNum: number) {
+    this.page = pageNum
+    this.dataServace.getMovies(this.page).subscribe((data: MoviesData) => {
+      this.dataServace.moviesDataResults.next(data.results);
+    })
+    console.log(this.page, pageNum);
+    console.log(this.dataServace.moviesDataResults.value);
+
   }
 
   movieDetails(i: number) {

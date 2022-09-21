@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 export interface MoviesData {
   page?: number,
@@ -32,8 +32,9 @@ export interface MovieDataResults {
 })
 export class DataService {
 
-  moviesUrl: string = 'https://api.themoviedb.org/3/movie/popular?api_key=f82ecbb7a5110caecaee2bee5e4c79d6&page=1'
   moviesDataResults: BehaviorSubject<MovieDataResults[]> = new BehaviorSubject([{}]);
+  baseUrl: string = 'https://api.themoviedb.org/3/movie/popular';
+  apiKey: string = 'f82ecbb7a5110caecaee2bee5e4c79d6'
 
   constructor(
     public http: HttpClient
@@ -42,7 +43,10 @@ export class DataService {
   /**
    * Fetch the movies data from the API
    */
-  getMovies(): Observable<MoviesData> {
-    return this.http.get<MoviesData>(this.moviesUrl);
+  getMovies(pageNum: number): Observable<MoviesData> {
+    const params = new HttpParams()
+      .set('api_key', this.apiKey)
+      .set('page', pageNum)
+    return this.http.get<MoviesData>(this.baseUrl, { params });
   }
 }
