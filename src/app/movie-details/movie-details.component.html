@@ -1,1 +1,18 @@
-<p>movie-details works!</p>
+<div class="container">
+  <h2>Movie Details</h2>
+
+  <div class="movie-wraper">
+    <p><b>Title: </b>{{theMovieData.title}}</p>
+    <p><b>Release Date: </b>{{theMovieData.release_date}}</p>
+    <img [src]="imgPrefex+theMovieData.backdrop_path">
+    <p><b>Vote Average: </b>{{theMovieData.vote_average}}</p>
+    <p><b>Vote Count: </b>{{theMovieData.vote_count}}</p>
+    <p><b>Adult: </b>{{theMovieData.adult}}</p>
+    <p><b>Original Language: </b>{{theMovieData.original_language}}</p>
+    <p><b>Overview: </b>{{theMovieData.overview}}</p>
+    <p><b>Popularity: </b>{{theMovieData.popularity}}</p>
+    <p><b>id: </b>{{theMovieData.id}}</p>
+    <p><b>Genre ids: </b>{{theMovieData.genre_ids}}</p>
+    <p><b>Video: </b>{{theMovieData.video}}</p>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataService, MoviesData } from '../data.service';
 
 @Component({
@@ -8,21 +9,21 @@ import { DataService, MoviesData } from '../data.service';
 })
 export class MoviesComponent implements OnInit {
 
-  imgPath: string = 'https://image.tmdb.org/t/p/w500/'
+  imgPrefex: string = 'https://image.tmdb.org/t/p/w500/'
+  apiKey: string = '?api_key=f82ecbb7a5110caecaee2bee5e4c79d6'
 
   constructor(
-    public dataServace: DataService
+    public dataServace: DataService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.dataServace.getMovies().subscribe((data: MoviesData) => {
-      console.log(data);
       this.dataServace.moviesDataResults.next(data.results);
-      console.log(this.dataServace.moviesDataResults.value);
     })
   }
 
   movieDetails(i: number) {
-
+    this.router.navigate(['/movie', i, { api_key: this.apiKey }])
   }
 }

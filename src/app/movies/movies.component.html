@@ -1,9 +1,10 @@
 <div class="container">
   <h2>All Movies</h2>
   <div class="movies-wraper">
-    <div class="movie" (click)="movieDetails(i)" *ngFor="let movie of dataServace.moviesDataResults.value; let i=index">
+    <div class="movie" (click)="movieDetails(movie.id)"
+      *ngFor="let movie of dataServace.moviesDataResults.value; let i=index">
       <h3 class="movies-text">Title: {{movie.title}}</h3>
-      <img [src]="imgPath+movie.backdrop_path" alt="img">
+      <img [src]="imgPrefex+movie.backdrop_path" alt="img">
       <p class="movies-text">Rating: {{movie.vote_average}}</p>
       <p class="release-text">Release Date: {{movie.release_date}}</p>
     </div>
