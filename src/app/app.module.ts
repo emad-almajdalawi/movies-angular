@@ -7,6 +7,7 @@ import { HeadBarComponent } from './head-bar/head-bar.component';
 import { MoviesComponent } from './movies/movies.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { ErrorComponent } from './error/error.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ErrorComponent } from './error/error.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
