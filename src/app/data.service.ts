@@ -35,7 +35,10 @@ export class DataService {
   moviesDataResults: BehaviorSubject<MovieDataResults[]> = new BehaviorSubject([{}]);
   baseUrl: string = 'https://api.themoviedb.org/3/movie/popular';
   apiKey: string = 'f82ecbb7a5110caecaee2bee5e4c79d6';
-  searchResults: BehaviorSubject<MovieDataResults[]> = new BehaviorSubject([]);
+
+  // searchResults: BehaviorSubject<MovieDataResults[]> = new BehaviorSubject([]);
+  searchResults: BehaviorSubject<any> = new BehaviorSubject([]);
+
 
   constructor(
     public http: HttpClient
@@ -47,7 +50,7 @@ export class DataService {
   getMovies(pageNum: number): Observable<MoviesData> {
     const params = new HttpParams()
       .set('api_key', this.apiKey)
-      .set('page', pageNum)
+      .set('page', pageNum);
     return this.http.get<MoviesData>(this.baseUrl, { params });
   }
 }

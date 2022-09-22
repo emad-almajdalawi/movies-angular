@@ -6,18 +6,15 @@ import { DataService, MoviesData } from '../data.service';
   templateUrl: './head-bar.component.html',
   styleUrls: ['./head-bar.component.css']
 })
-export class HeadBarComponent implements OnInit {
+export class HeadBarComponent {
 
   constructor(public dataServace: DataService) { }
-
-  ngOnInit(): void {
-  }
 
   /**
    * Redirect to the home page at the first page
    */
   home(): void {
-    this.dataServace.searchResults.next([])
+    this.dataServace.searchResults.next([]);
     this.dataServace.getMovies(1).subscribe((data: MoviesData) => {
       this.dataServace.moviesDataResults.next(data.results);
     })
@@ -27,15 +24,16 @@ export class HeadBarComponent implements OnInit {
    * Search for a movi by its title
    * @param {any} e the event
    */
-  search(e: any) {
+  search(e: any): void {
     const results = this.dataServace.moviesDataResults.value.filter(element => {
-      return element.title?.toLowerCase().includes(e.target.value.toLowerCase())
+      return element.title?.toLowerCase().includes(e.target.value.toLowerCase());
     })
+    console.log(e.target.value)
 
-    this.dataServace.searchResults.next(results)
+    this.dataServace.searchResults.next(results);
 
     if (results.length == 0) {
-      alert('No results found!')
+      alert('No results found!');
     }
   }
 }
