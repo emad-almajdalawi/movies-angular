@@ -1,31 +1,53 @@
 <div class="container">
-  <h2>All Movies</h2>
+  <div *ngIf="dataServace.searchResults.value.length == 0 ; then allMoviesBlock else searchResultsBlock"></div>
+  <ng-template #allMoviesBlock>
+    <h1>All Movies</h1>
+  </ng-template>
+  <ng-template #searchResultsBlock>
+    <h1>Search Results</h1>
+  </ng-template>
+
   <div class="movies-wraper">
-    <div class="movie" (click)="movieDetails(movie.id)"
-      *ngFor="let movie of dataServace.moviesDataResults.value; let i=index">
-      <h3 class="movies-text">{{movie.title}}</h3>
-      <img [src]="imgPrefex+movie.backdrop_path" alt="img">
-      <p class="movies-text">Rating: {{movie.vote_average}}</p>
-      <p class="release-text">Release Date: {{movie.release_date}}</p>
-    </div>
+    <div *ngIf="dataServace.searchResults.value.length == 0 ; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+      <div class="movie" (click)="movieDetails(movie.id)"
+        *ngFor="let movie of dataServace.moviesDataResults.value; let i=index">
+        <h3 class="movies-text">{{movie.title}}</h3>
+        <img [src]="imgPrefex+movie.backdrop_path" alt="img">
+        <p class="movies-text">Rating: {{movie.vote_average}}</p>
+        <p class="release-text">Release Date: {{movie.release_date}}</p>
+      </div>
+    </ng-template>
+    <ng-template #elseBlock>
+      <div class="movie" (click)="movieDetails(movie.id)"
+        *ngFor="let movie of dataServace.searchResults.value; let i=index">
+        <h3 class="movies-text">{{movie.title}}</h3>
+        <img [src]="imgPrefex+movie.backdrop_path" alt="img">
+        <p class="movies-text">Rating: {{movie.vote_average}}</p>
+        <p class="release-text">Release Date: {{movie.release_date}}</p>
+      </div>
+    </ng-template>
   </div>
 
-  <div class="footer">
-    <div></div>
-    <div class="prev">
-      <button (click)="changePage(page-1)">Prevouse</button>
-    </div>
-    <div class="pages">
-      <div class="page-numbers">
-        <button class="number" (click)="changePage(1)">1</button>
-        <button class="number" (click)="changePage(2)">2</button>
-        <button class="number" (click)="changePage(3)">3</button>
-        <button class="number" (click)="changePage(4)">4</button>
+  <div *ngIf="dataServace.searchResults.value.length == 0 ; then withFooter"></div>
+  <ng-template #withFooter>
+    <div class="footer">
+      <div></div>
+      <div class="prev">
+        <button (click)="changePage(page-1)">Prevouse</button>
       </div>
+      <div class="pages">
+        <div class="page-numbers">
+          <button class="number" (click)="changePage(1)">1</button>
+          <button class="number" (click)="changePage(2)">2</button>
+          <button class="number" (click)="changePage(3)">3</button>
+          <button class="number" (click)="changePage(4)">4</button>
+        </div>
+      </div>
+      <div class="next">
+        <button (click)="changePage(page+1)">Next</button>
+      </div>
+      <div></div>
     </div>
-    <div class="next">
-      <button (click)="changePage(page+1)">Next</button>
-    </div>
-    <div></div>
-  </div>
+  </ng-template>
 </div>

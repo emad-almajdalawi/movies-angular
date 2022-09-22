@@ -21,6 +21,9 @@ export class MoviesComponent implements OnInit {
   ngOnInit(): void {
     this.dataServace.getMovies(this.page).subscribe((data: MoviesData) => {
       this.dataServace.moviesDataResults.next(data.results);
+      console.log(this.dataServace.moviesDataResults.value)
+      console.log(this.dataServace.searchResults.value)
+
     })
   }
 

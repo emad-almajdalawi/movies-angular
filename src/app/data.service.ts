@@ -34,7 +34,8 @@ export class DataService {
 
   moviesDataResults: BehaviorSubject<MovieDataResults[]> = new BehaviorSubject([{}]);
   baseUrl: string = 'https://api.themoviedb.org/3/movie/popular';
-  apiKey: string = 'f82ecbb7a5110caecaee2bee5e4c79d6'
+  apiKey: string = 'f82ecbb7a5110caecaee2bee5e4c79d6';
+  searchResults: BehaviorSubject<MovieDataResults[]> = new BehaviorSubject([]);
 
   constructor(
     public http: HttpClient
