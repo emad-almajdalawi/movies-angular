@@ -28,7 +28,6 @@ export class HeadBarComponent {
     const results = this.dataServace.moviesDataResults.value.filter(element => {
       return element.title?.toLowerCase().includes(e.target.value.toLowerCase());
     })
-    console.log(e.target.value)
 
     this.dataServace.searchResults.next(results);
 

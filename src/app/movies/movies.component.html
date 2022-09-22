@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="dataServace.searchResults.value.length == 0 ; then allMoviesBlock else searchResultsBlock"></div>
+  <div *ngIf="dataServace.searchResults.value.length == 0 then allMoviesBlock else searchResultsBlock"></div>
   <ng-template #allMoviesBlock>
     <h1>All Movies</h1>
   </ng-template>

@@ -26,7 +26,6 @@ export interface MovieDataResults {
   vote_count?: number
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -36,8 +35,7 @@ export class DataService {
   baseUrl: string = 'https://api.themoviedb.org/3/movie/popular';
   apiKey: string = 'f82ecbb7a5110caecaee2bee5e4c79d6';
 
-  // searchResults: BehaviorSubject<MovieDataResults[]> = new BehaviorSubject([]);
-  searchResults: BehaviorSubject<any> = new BehaviorSubject([]);
+  searchResults: BehaviorSubject<MovieDataResults[] | null> = new BehaviorSubject<MovieDataResults[] | null>([]);
 
 
   constructor(
@@ -46,6 +44,7 @@ export class DataService {
 
   /**
    * Fetch the movies data from the API
+   * @param {number} pageNum The number of the page that weill be fetched
    */
   getMovies(pageNum: number): Observable<MoviesData> {
     const params = new HttpParams()
