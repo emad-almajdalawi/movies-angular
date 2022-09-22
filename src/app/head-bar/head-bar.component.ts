@@ -18,7 +18,6 @@ export class HeadBarComponent implements OnInit {
    */
   home(): void {
     this.dataServace.searchResults.next([])
-    console.log(this.dataServace.searchResults.value);
     this.dataServace.getMovies(1).subscribe((data: MoviesData) => {
       this.dataServace.moviesDataResults.next(data.results);
     })

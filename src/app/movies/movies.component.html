@@ -38,10 +38,8 @@
       </div>
       <div class="pages">
         <div class="page-numbers">
-          <button class="number" (click)="changePage(1)">1</button>
-          <button class="number" (click)="changePage(2)">2</button>
-          <button class="number" (click)="changePage(3)">3</button>
-          <button class="number" (click)="changePage(4)">4</button>
+          <button class="number" (click)="changePage(pageNum+1)"
+            *ngFor="let x of numSequence(51); let pageNum = index;">{{pageNum+1}}</button>
         </div>
       </div>
       <div class="next">

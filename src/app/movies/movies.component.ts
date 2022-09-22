@@ -21,9 +21,6 @@ export class MoviesComponent implements OnInit {
   ngOnInit(): void {
     this.dataServace.getMovies(this.page).subscribe((data: MoviesData) => {
       this.dataServace.moviesDataResults.next(data.results);
-      console.log(this.dataServace.moviesDataResults.value)
-      console.log(this.dataServace.searchResults.value)
-
     })
   }
 
@@ -32,12 +29,13 @@ export class MoviesComponent implements OnInit {
     this.dataServace.getMovies(this.page).subscribe((data: MoviesData) => {
       this.dataServace.moviesDataResults.next(data.results);
     })
-    console.log(this.page, pageNum);
-    console.log(this.dataServace.moviesDataResults.value);
-
   }
 
   movieDetails(i: number) {
     this.router.navigate(['/movie', i, { api_key: this.apiKey }])
+  }
+
+  numSequence(n: number): Array<number> {
+    return Array(n);
   }
 }
