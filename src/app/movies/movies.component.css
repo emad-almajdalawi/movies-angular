@@ -26,40 +26,45 @@
 }
 
 .footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 5fr 1fr 1fr;
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .page-numbers {
-  background: lightgray;
-  padding: 12px;
-  border-radius: 25px;
-  display: grid;
-  grid-template-columns: repeat(17, 1fr);
+  height: 100px;
+  background-color: #EFEFEF;
+  display: flex;
+  justify-content: center;
 }
 
 button {
   cursor: pointer;
-  width: 75%;
-  border-radius: 30px;
-}
-
-.prev {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.next {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.number {
-  background: transparent;
+  border-radius: 50%;
   border: none;
-  color: black;
-  font-size: 18px;
-  font-weight: bold;
-  padding: 5px;
+}
+
+button:hover {
+  background-color: lightgray;
+}
+
+.page-numbers button {
+  width: 50px;
+  border-radius: 0;
+}
+
+.prev button,
+.next button {
+  width: 100px;
+  height: 100px;
+}
+
+.prev button {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.next button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }

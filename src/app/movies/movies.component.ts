@@ -1,34 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { DataService, MoviesData } from '../data.service';
 
+
+interface ParamsMap extends ParamMap {
+  [key: string]: any;
+}
 
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.css']
 })
+
 export class MoviesComponent implements OnInit {
 
   imgPrefex: string = 'https://image.tmdb.org/t/p/w500/';
   apiKey: string = '?api_key=f82ecbb7a5110caecaee2bee5e4c79d6';
-  page: any = 1;
+  page: number = 1;
+  paginationArray: null[] = new Array(17);
 
   constructor(
     public dataServace: DataService,
     private router: Router,
-    private activRoute: ActivatedRoute
+    private activRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.page = this.activRoute.snapshot.paramMap.get('page');
-    console.log(this.page, 'first value')
+    this.activRoute.paramMap.subscribe((paramsMap: ParamsMap) => {
+      this.page = Number(paramsMap['params']['page']);
 
-    this.dataServace.getMovies(Number(this.page)).subscribe((data: MoviesData) => {
-      this.dataServace.moviesDataResults.next(data.results);
-    })
-
-    this.router.navigate(['/movies', this.page]);
+      this.dataServace.getMovies(this.page).subscribe((data: MoviesData) => {
+        this.dataServace.moviesDataResults.next(data.results);
+      });
+    });
   }
 
   /**
@@ -36,12 +41,7 @@ export class MoviesComponent implements OnInit {
    * @param {number} pageNum The new page number
    */
   changePage(pageNum: number): void {
-    this.page = pageNum
-
-    this.dataServace.getMovies(this.page).subscribe((data: MoviesData) => {
-      this.dataServace.moviesDataResults.next(data.results);
-    })
-
+    this.page = pageNum;
     this.router.navigate(['/movies', this.page]);
   }
 
@@ -51,13 +51,5 @@ export class MoviesComponent implements OnInit {
    */
   movieDetails(id: number): void {
     this.router.navigate(['/movie', id]);
-  }
-
-  /**
-   * Creats an array of a spicefic number of emty elements
-   * @param {number} n The aray's length
-   */
-  numSequence(n: number): number[] {
-    return Array(n);
   }
 }
