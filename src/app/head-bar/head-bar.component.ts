@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataService, MoviesData } from '../data.service';
 
 @Component({
@@ -8,7 +9,10 @@ import { DataService, MoviesData } from '../data.service';
 })
 export class HeadBarComponent {
 
-  constructor(public dataServace: DataService) { }
+  constructor(
+    public dataServace: DataService,
+    private router: Router
+  ) { }
 
   /**
    * Redirect to the home page at the first page
@@ -18,6 +22,7 @@ export class HeadBarComponent {
     this.dataServace.getMovies(1).subscribe((data: MoviesData) => {
       this.dataServace.moviesDataResults.next(data.results);
     })
+    this.router.navigate(['/movies', 1]);
   }
 
   /**
@@ -25,9 +30,12 @@ export class HeadBarComponent {
    * @param {any} e the event
    */
   search(e: any): void {
-    const results = this.dataServace.moviesDataResults.value.filter(element => {
+    var results = this.dataServace.moviesDataResults.value.filter(element => {
       return element.title?.toLowerCase().includes(e.target.value.toLowerCase());
     })
+    if (e.target.value == '') {
+      results = [];
+    }
 
     this.dataServace.searchResults.next(results);
 
