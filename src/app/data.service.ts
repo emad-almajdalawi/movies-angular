@@ -31,6 +31,8 @@ export interface MovieDataResults {
 })
 export class DataService {
 
+  // allMovies: MoviesData[] = []
+
   moviesDataResults: BehaviorSubject<MovieDataResults[]> = new BehaviorSubject([{}]);
   baseUrl: string = 'https://api.themoviedb.org/3/movie/popular';
   apiKey: string = 'f82ecbb7a5110caecaee2bee5e4c79d6';
@@ -52,4 +54,15 @@ export class DataService {
       .set('page', pageNum);
     return this.http.get<MoviesData>(this.baseUrl, { params });
   }
+
+  // /**
+  //  * Fetch 50 pages from the API
+  //  */
+  // getAllMovies(): void {
+  //   for (let i = 1; i <= 50; i++) {
+  //     this.getMovies(i).subscribe((data: MoviesData) => {
+  //       this.allMovies.push(data)
+  //     })
+  //   }
+  // }
 }
