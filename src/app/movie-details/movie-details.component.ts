@@ -9,7 +9,7 @@ import { DataService, MovieDataResults } from '../data.service';
 })
 export class MovieDetailsComponent implements OnInit {
 
-  id: string | null = '';
+  id?: number;
   imgPrefex: string = 'https://image.tmdb.org/t/p/w500/';
   theMovieData: MovieDataResults = {};
 
@@ -19,7 +19,7 @@ export class MovieDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.id = this.activRoute.snapshot.paramMap.get('id');
-    this.theMovieData = this.dataService.moviesDataResults.value.filter(element => element.id?.toString() == this.id)[0];
+    this.id = Number(this.activRoute.snapshot.paramMap.get('id'));
+    this.theMovieData = this.dataService.moviesDataResults.value.filter(element => element.id === this.id)[0];
   }
 }

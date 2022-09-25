@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService, MoviesData } from '../data.service';
+import { DataService, MovieDataResults } from '../data.service';
 
 @Component({
   selector: 'app-head-bar',
@@ -8,7 +8,6 @@ import { DataService, MoviesData } from '../data.service';
   styleUrls: ['./head-bar.component.css']
 })
 export class HeadBarComponent {
-
   constructor(
     public dataServace: DataService,
     private router: Router
@@ -19,28 +18,26 @@ export class HeadBarComponent {
    */
   home(): void {
     this.dataServace.searchResults.next([]);
-    this.dataServace.getMovies(1).subscribe((data: MoviesData) => {
-      this.dataServace.moviesDataResults.next(data.results);
-    })
     this.router.navigate(['/movies', 1]);
   }
 
   /**
-   * Search for a movi by its title
+   * Search for a movie by its title
    * @param {any} e the event
    */
   search(e: any): void {
-    var results = this.dataServace.moviesDataResults.value.filter(element => {
-      return element.title?.toLowerCase().includes(e.target.value.toLowerCase());
-    })
-    if (e.target.value == '') {
-      results = [];
-    }
+    const search: string = e.target.value.toLowerCase();
 
-    this.dataServace.searchResults.next(results);
+    let results = this.dataServace.moviesDataResults.value.filter((element: MovieDataResults) => (
+      element.title?.toLowerCase().includes(search)
+    ));
 
-    if (results.length == 0) {
-      alert('No results found!');
+    if (search) {
+      this.dataServace.isEmpty = false;
+      this.dataServace.searchResults.next(results);
+    } else {
+      this.dataServace.isEmpty = true;
+      this.dataServace.searchResults.next([]);
     }
   }
 }

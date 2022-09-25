@@ -1,4 +1,4 @@
 <div class="container">
-  <a routerLink="" (click)="home()">Movies</a>
-  <input (keyup)="search($event)" type="text" name="search" placeholder="Search">
+  <a (click)="home()">Movies</a>
+  <input type="text" name="search" placeholder="Search" (keyup)="search($event)">
 </div>

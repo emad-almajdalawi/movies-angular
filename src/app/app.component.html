@@ -1,3 +1,5 @@
 <app-head-bar></app-head-bar>
-
+<div *ngIf="loaderServace.isLoading | async" class="loader-container">
+  <mat-spinner style="top:50%; left: 50%;"></mat-spinner>
+</div>
 <router-outlet></router-outlet>

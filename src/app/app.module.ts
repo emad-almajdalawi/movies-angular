@@ -7,7 +7,10 @@ import { HeadBarComponent } from './head-bar/head-bar.component';
 import { MoviesComponent } from './movies/movies.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { ErrorComponent } from './error/error.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { IntercepterService } from './loader/intercepter.service';
+
 
 @NgModule({
   declarations: [
@@ -20,9 +23,12 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: IntercepterService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
