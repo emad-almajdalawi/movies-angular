@@ -30,9 +30,12 @@ export class HeadBarComponent {
    * @param {any} e the event
    */
   search(e: any): void {
-    const results = this.dataServace.moviesDataResults.value.filter(element => {
+    var results = this.dataServace.moviesDataResults.value.filter(element => {
       return element.title?.toLowerCase().includes(e.target.value.toLowerCase());
     })
+    if (e.target.value == '') {
+      results = [];
+    }
 
     this.dataServace.searchResults.next(results);
 

@@ -18,7 +18,6 @@ export class MoviesComponent implements OnInit {
     public dataServace: DataService,
     private router: Router,
     private activRoute: ActivatedRoute
-
   ) { }
 
   ngOnInit(): void {
